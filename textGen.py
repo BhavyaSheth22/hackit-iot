@@ -9,5 +9,5 @@ import string
 # file1.close()
 
 with open("zlib.txt", 'w', encoding='utf-8') as f:
-    for i in range(1000000):
-        f.write(random.choice("0123456789"))
+    for i in range(50000):
+        f.write(random.choice("0123456789 abc"))
