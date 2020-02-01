@@ -1,0 +1,81 @@
+import paho.mqtt.client as mqtt
+import json
+import os
+from thread_handler.thread_handler import ThreadHandler
+# import time
+
+#CloudMQTT
+# broker_address = 'hairdresser.cloudmqtt.com'
+# mqtt_username = 'iexrwcnw'
+# mqtt_password = '85IGF3k0vjc4'
+# mqtt_port = 17648
+
+# Local broker
+broker_address = '127.0.0.1'
+mqtt_port = 1884
+
+
+def on_connect(client, userdata, flags, rc):
+    if rc==0:
+        client.connected_flag=True
+        print("Connected OK, rc =", rc)
+    else:
+        print("Bad connection, rc =", rc)
+
+def on_message(client, userdata, message):
+    print('\n\tMessage received')
+    
+    try:
+        msg = message.payload.decode()
+        print('\tpayload =', msg, '\n')
+
+        #Process message here
+        msgDict = json.loads(msg)
+        # dir_path = os.path.dirname(os.path.realpath(__file__))
+        # if not os.path.isdir(dir_path + str(msgDict['i'])):
+        #     os.mkdir(dir_name + '/' + str(msgDict['i']))
+        
+
+
+        def write_data(deviceID, data):
+            with open('data/' + deviceID + '.txt', 'a') as f:
+                f.write(data + '\n')
+        
+        def write_timestamp(deviceID, timestamp):
+            with open('timestamps/' + deviceID + '.txt', 'a') as f:
+                f.write(timestamp + '\n')
+        
+        handle = ThreadHandler()
+        handle.spawn_thread(write_data, (str(msgDict['i']), str(msgDict['m'])))
+        handle.spawn_thread(write_timestamp, (str(msgDict['i']), str(msgDict['t']))) 
+        
+
+    except Exception as ex:
+        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        message = template.format(type(ex).__name__, ex.args)
+        print(message)
+    
+    
+
+
+
+
+def on_subscribe(client, userdata, mid, granted_qos):
+    print('subscribed')
+
+
+client = mqtt.Client('sub', clean_session=False) # stores subscriptions even on disconnect
+client.connected_flag=False
+client.on_connect=on_connect
+client.on_subscribe=on_subscribe
+client.on_message=on_message
+# client.username_pw_set(username=mqtt_username, password=mqtt_password) $ For cloudmqtt
+
+
+client.connect(host=broker_address, port=mqtt_port)
+
+print('Waiting in main loop')
+# client.publish('test', 'conn')
+client.subscribe('house')
+client.loop_forever()
+print('loop ended')
