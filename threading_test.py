@@ -10,13 +10,13 @@ def connect_client(deviceID):
     print(f"inside get id: {id_}")
 
     client_ = paho.Client(id_)
-    client_.connect("127.0.0.1",1884)
+    client_.connect("127.0.0.1",1883)
     
     for i in range(30):
         message = str(random.uniform(20, 30))[:7]
         msg = {
             'i': deviceID,
-            't': datetime.now().isoformat(timespec='seconds'),
+            't': datetime.now().timestamp(),
             'm': message
         }
         print(client_.publish('house', json.dumps(msg)).is_published())
