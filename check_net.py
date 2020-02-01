@@ -1,13 +1,7 @@
 import requests
 import time
-
-
-# def connect(host='http://google.com'):
-#     try:
-#         urllib.request.urlopen(host)
-#         return True
-#     except:
-#         return False
+from gen_json import gen_json
+from lzma_code import lzma_compress
 
 
 def connect():
@@ -22,12 +16,13 @@ def connect():
         return 0
 
 
+start_time = time.time()
+
 while(1):
     i = connect()
     if i == 0:
         # add one json to queue
         print("not connected")
-        # time.sleep(2)
 
     elif i == 1:
         # add to cloud
@@ -36,4 +31,6 @@ while(1):
     elif i == -1:
         break
 
-    time.sleep(2)
+    elapsed_time = time.time() - start_time
+    if(int(elapsed_time) % 10 == 0):
+        print("10 secs gone")

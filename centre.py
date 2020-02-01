@@ -4,7 +4,7 @@ import os
 from thread_handler.thread_handler import ThreadHandler
 # import time
 
-#CloudMQTT
+# CloudMQTT
 # broker_address = 'hairdresser.cloudmqtt.com'
 # mqtt_username = 'iexrwcnw'
 # mqtt_password = '85IGF3k0vjc4'
@@ -12,24 +12,25 @@ from thread_handler.thread_handler import ThreadHandler
 
 # Local broker
 broker_address = '127.0.0.1'
-mqtt_port = 1884
+mqtt_port = 1883
 
 
 def on_connect(client, userdata, flags, rc):
-    if rc==0:
-        client.connected_flag=True
+    if rc == 0:
+        client.connected_flag = True
         print("Connected OK, rc =", rc)
     else:
         print("Bad connection, rc =", rc)
 
+
 def on_message(client, userdata, message):
     print('\n\tMessage received')
-    
+
     try:
         msg = message.payload.decode()
         print('\tpayload =', msg, '\n')
 
-        #Process message here
+        # Process message here
         msgDict = json.loads(msg)
         dir_path = os.path.dirname(os.path.realpath(__file__))
         if not os.path.isdir(dir_path + '/data/' + str(msgDict['i'])):
@@ -40,25 +41,25 @@ def on_message(client, userdata, message):
                 with open(deviceDir + '/' + str(msgDict['i']) + '/timestamps.txt', 'a') as f:
                     f.write(str(value) + '\n')
             elif key != 'i':
-                with open(deviceDir+ '/' + str(msgDict['i']) + '/' + str(key) + '.txt', 'a') as f:
+                with open(deviceDir + '/' + str(msgDict['i']) + '/' + str(key) + '.txt', 'a') as f:
                     f.write(str(value) + '\n')
-       
 
     except Exception as ex:
         template = "An exception of type {0} occurred. Arguments:\n{1!r}"
         message = template.format(type(ex).__name__, ex.args)
         print(message)
-    
+
 
 def on_subscribe(client, userdata, mid, granted_qos):
     print('subscribed')
 
 
-client = mqtt.Client('sub', clean_session=False) # stores subscriptions even on disconnect
-client.connected_flag=False
-client.on_connect=on_connect
-client.on_subscribe=on_subscribe
-client.on_message=on_message
+# stores subscriptions even on disconnect
+client = mqtt.Client('sub', clean_session=False)
+client.connected_flag = False
+client.on_connect = on_connect
+client.on_subscribe = on_subscribe
+client.on_message = on_message
 # client.username_pw_set(username=mqtt_username, password=mqtt_password) $ For cloudmqtt
 
 
