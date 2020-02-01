@@ -1,10 +1,7 @@
-import concurrent.futures
-import requests
-import threading
-import time
 import paho.mqtt.client as paho
+from thread_handler.thread_handler import ThreadHandler
+import time
 import random
-
 
 def connect_client():
     id_ = "client"+str(random.randint(0,10000000))
@@ -22,12 +19,11 @@ def connect_client():
 def connect_all_clients(number):
     print("inside connect all client")
 
-    thread_list = list()
+    handle = ThreadHandler()
 
     for _ in range(number):
-        t = threading.Thread(target=connect_client)
-        thread_list.append(t)
-        t.start()
+        handle.spawn_thread(connect_client)
+        
 
 if __name__ == "__main__":
     number = int(input("enter pub: "))
