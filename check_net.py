@@ -16,21 +16,21 @@ def connect():
         return 0
 
 
-start_time = time.time()
+# start_time = time.time()
 
-while(1):
-    i = connect()
-    if i == 0:
-        # add one json to queue
-        print("not connected")
+# while(1):
+#     i = connect()
+#     if i == 0:
+#         # add one json to queue
+#         print("not connected")
 
-    elif i == 1:
-        # add to cloud
-        print("connected")
+#     elif i == 1:
+#         # add to cloud
+#         print("connected")
 
-    elif i == -1:
-        break
+#     elif i == -1:
+#         break
 
-    elapsed_time = time.time() - start_time
-    if(int(elapsed_time) % 10 == 0):
-        print("10 secs gone")
+#     elapsed_time = time.time() - start_time
+#     if(int(elapsed_time) % 10 == 0):
+#         print("10 secs gone")

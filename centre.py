@@ -10,10 +10,6 @@ from thread_handler.thread_handler import ThreadHandler
 # mqtt_password = '85IGF3k0vjc4'
 # mqtt_port = 17648
 
-# Local broker
-broker_address = '127.0.0.1'
-mqtt_port = 1883
-
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
@@ -54,19 +50,24 @@ def on_subscribe(client, userdata, mid, granted_qos):
     print('subscribed')
 
 
-# stores subscriptions even on disconnect
-client = mqtt.Client('sub', clean_session=False)
-client.connected_flag = False
-client.on_connect = on_connect
-client.on_subscribe = on_subscribe
-client.on_message = on_message
-# client.username_pw_set(username=mqtt_username, password=mqtt_password) $ For cloudmqtt
+def action(l):
+    # Local broker
+    broker_address = '127.0.0.1'
+    mqtt_port = 1883
 
+    # stores subscriptions even on disconnect
+    client = mqtt.Client('sub', clean_session=False)
+    client.connected_flag = False
+    client.on_connect = on_connect
+    client.on_subscribe = on_subscribe
+    client.on_message = on_message
+    # client.username_pw_set(username=mqtt_username, password=mqtt_password) $ For cloudmqtt
 
-client.connect(host=broker_address, port=mqtt_port)
+    client.connect(host=broker_address, port=mqtt_port)
 
-print('Waiting in main loop')
-# client.publish('test', 'conn')
-client.subscribe('house')
-client.loop_forever()
-print('loop ended')
+    print('Waiting in main loop')
+    # client.publish('test', 'conn')
+    client.subscribe('house')
+    client.loop_forever()
+    return l+1
+    print('loop ended')
