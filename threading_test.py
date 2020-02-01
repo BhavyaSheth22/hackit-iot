@@ -10,14 +10,22 @@ def connect_client(deviceID):
     print(f"inside get id: {id_}")
 
     client_ = paho.Client(id_)
-    client_.connect("127.0.0.1",1883)
+    client_.connect("127.0.0.1",1884)
     
-    for i in range(30):
-        message = str(random.uniform(20, 30))[:7]
+    for i in range(300):
+        temp = str(random.uniform(20, 30))[:7]
+        humidity = str(random.randint(0, 100))
+        pressure = str(random.uniform(0, 30))[:7]
+        air_pressure = str(random.uniform(990, 1005)) [:7]
+        ph = str(random.uniform(0, 14))[:5]
+
         msg = {
             'i': deviceID,
             't': datetime.now().timestamp(),
-            'm': message
+            'temp': temp,
+            'humidity': humidity,
+            'air_pressure': air_pressure,
+            'ph': ph
         }
         print(client_.publish('house', json.dumps(msg)).is_published())
         time.sleep(0.5)
