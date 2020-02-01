@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 
 # class gen_json:
 #     def __init__(self):
@@ -11,7 +12,7 @@ def gen_json():
     final = {}
     for deviceID in range(50):
         deviceTree = {}
-        timestamps = open('data/' + str(deviceID) +
+        timestamps = open('./data/' + str(deviceID) +
                           '/timestamps.txt', 'r').readlines()
         for filename in os.listdir('./data/' + str(deviceID)):
             if filename != 'timestamps.txt':
@@ -20,6 +21,12 @@ def gen_json():
                     deviceTree[filename[:-4]] = {time[:-1]: data_item[:-1]
                                                  for time, data_item in zip(timestamps, data)}
         final[str(deviceID)] = deviceTree
+        try:
+            shutil.rmtree('data/' + str(deviceID))
+        except OSError as e:
+            print ("gen_json: Error: %s - %s." % (e.filename, e.strerror))
 
     with open("block.txt", 'w') as f:
         f.write(json.dumps(final))
+
+# gen_json()
