@@ -12,7 +12,7 @@ from thread_handler.thread_handler import ThreadHandler
 
 # Local broker
 broker_address = '127.0.0.1'
-mqtt_port = 1883
+mqtt_port = 1884
 
 
 def on_connect(client, userdata, flags, rc):
@@ -24,11 +24,11 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    print('\n\tMessage received')
+    # print('\n\tMessage received')
 
     try:
         msg = message.payload.decode()
-        print('\tpayload =', msg, '\n')
+        # print('\tpayload =', msg, '\n')
 
         # Process message here
         msgDict = json.loads(msg)
@@ -45,7 +45,7 @@ def on_message(client, userdata, message):
                     f.write(str(value) + '\n')
 
     except Exception as ex:
-        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        template = "centre:An exception of type {0} occurred. Arguments:\n{1!r}"
         message = template.format(type(ex).__name__, ex.args)
         print(message)
 

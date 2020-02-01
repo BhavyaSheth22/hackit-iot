@@ -11,9 +11,9 @@ def connect_client(deviceID):
     print(f"inside get id: {id_}")
 
     client_ = paho.Client(id_)
-    client_.connect("127.0.0.1", 1883)
+    client_.connect("127.0.0.1", 1884)
 
-    for i in range(100):
+    for i in range(1000):
         temp = str(random.uniform(20, 30))[:7]
         humidity = str(random.randint(0, 100))
         pressure = str(random.uniform(0, 30))[:7]

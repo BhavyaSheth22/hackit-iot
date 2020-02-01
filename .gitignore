@@ -7,3 +7,4 @@ compressed_data/*
 block.txt
 lzma_comp.txt,
 bz2_comp.txt
+comp_block.txt

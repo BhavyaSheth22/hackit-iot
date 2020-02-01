@@ -24,5 +24,3 @@ if __name__ == '__main__':
 
     db.update("vedanta8a6asda")
     print(db.read(str(1580585038.451585)))
-
-    
