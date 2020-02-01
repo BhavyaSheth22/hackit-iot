@@ -32,22 +32,23 @@ def on_message(client, userdata, message):
         #Process message here
         msgDict = json.loads(msg)
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        if not os.path.isdir(dir_path + str(msgDict['i'])):
-            os.mkdir(dir_name + '/' + str(msgDict['i']))
-        for (key, value) in 
-        
-
-        
+        if not os.path.isdir(dir_path + '/data/' + str(msgDict['i'])):
+            os.mkdir(dir_path + '/data/' + str(msgDict['i']))
+        deviceDir = os.path.dirname(dir_path + '/data/' + str(msgDict['i']))
+        for key, value in msgDict.items():
+            if key == 't':
+                with open(deviceDir + '/' + str(msgDict['i']) + '/timestamps.txt', 'a') as f:
+                    f.write(str(value) + '\n')
+            elif key != 'i':
+                with open(deviceDir+ '/' + str(msgDict['i']) + '/' + str(key) + '.txt', 'a') as f:
+                    f.write(str(value) + '\n')
+       
 
     except Exception as ex:
         template = "An exception of type {0} occurred. Arguments:\n{1!r}"
         message = template.format(type(ex).__name__, ex.args)
         print(message)
     
-    
-
-
-
 
 def on_subscribe(client, userdata, mid, granted_qos):
     print('subscribed')
