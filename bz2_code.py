@@ -10,8 +10,7 @@ file1 = open('bz2_comp.txt', 'wb')
 file1.write(compressed_data)
 file1.close()
 
-compress_ratio = (float(len(original_data)) -
-                  float(len(compressed_data))) / float(len(original_data))
+compress_ratio = (float(len(original_data)) - float(len(compressed_data))) / float(len(original_data))
 print('Compressed: %d%%' % (100.0 * compress_ratio))
 
 
