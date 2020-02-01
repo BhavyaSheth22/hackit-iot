@@ -2,6 +2,8 @@
 __pycache__/
 data/*
 timestamp/*
+segregated_data/*
+compressed_data/*
 block.txt
 lzma_comp.txt,
 bz2_comp.txt
