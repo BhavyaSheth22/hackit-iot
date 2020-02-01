@@ -31,23 +31,12 @@ def on_message(client, userdata, message):
 
         #Process message here
         msgDict = json.loads(msg)
-        # dir_path = os.path.dirname(os.path.realpath(__file__))
-        # if not os.path.isdir(dir_path + str(msgDict['i'])):
-        #     os.mkdir(dir_name + '/' + str(msgDict['i']))
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        if not os.path.isdir(dir_path + str(msgDict['i'])):
+            os.mkdir(dir_name + '/' + str(msgDict['i']))
+        for (key, value) in 
         
 
-
-        def write_data(deviceID, data):
-            with open('data/' + deviceID + '.txt', 'a') as f:
-                f.write(data + '\n')
-        
-        def write_timestamp(deviceID, timestamp):
-            with open('timestamps/' + deviceID + '.txt', 'a') as f:
-                f.write(timestamp + '\n')
-        
-        handle = ThreadHandler()
-        handle.spawn_thread(write_data, (str(msgDict['i']), str(msgDict['m'])))
-        handle.spawn_thread(write_timestamp, (str(msgDict['i']), str(msgDict['t']))) 
         
 
     except Exception as ex:

@@ -1,2 +1,7 @@
 .vscode/
 __pycache__/
+data/*
+timestamp/*
+block.txt
+lzma_comp.txt,
+bz2_comp.txt
