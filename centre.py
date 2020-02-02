@@ -24,11 +24,11 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    print('\n\tMessage received')
+    # print('\n\tMessage received')
 
     try:
         msg = message.payload.decode()
-        print('\tpayload =', msg, '\n')
+        # print('\tpayload =', msg, '\n')
 
         # Process message here
         msgDict = json.loads(msg)
