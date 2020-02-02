@@ -9,7 +9,7 @@ class AwSClient():
     def update(self, data):
         self.table.put_item(Item = {
             'timestamp' : str(datetime.now().timestamp()),
-            'blob' : str(data)
+            'blob' : data
         })
 
     def read(self, key):
