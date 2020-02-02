@@ -12,7 +12,7 @@ from thread_handler.thread_handler import ThreadHandler
 
 # Local broker
 broker_address = '127.0.0.1'
-mqtt_port = 1884
+mqtt_port = 1883
 
 
 def on_connect(client, userdata, flags, rc):
@@ -54,6 +54,10 @@ def on_subscribe(client, userdata, mid, granted_qos):
     print('subscribed')
 
 
+# Local broker
+broker_address = '127.0.0.1'
+mqtt_port = 1883
+
 # stores subscriptions even on disconnect
 client = mqtt.Client('sub', clean_session=False)
 client.connected_flag = False
@@ -61,7 +65,6 @@ client.on_connect = on_connect
 client.on_subscribe = on_subscribe
 client.on_message = on_message
 # client.username_pw_set(username=mqtt_username, password=mqtt_password) $ For cloudmqtt
-
 
 client.connect(host=broker_address, port=mqtt_port)
 

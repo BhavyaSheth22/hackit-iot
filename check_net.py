@@ -19,14 +19,14 @@ def connect():
         return 0
 
 
-start_time = time.time()
+# start_time = time.time()
 
 queue = []
 
 dbClient = AwSClient('fsociety_database')
 
 while(1):
-    elapsed_time = time.time() - start_time
+    # elapsed_time = time.time() - start_time
     # if round(elapsed_time) > 10 and round(elapsed_time) % 10 == 0:
     #     print("10 secs gone")
 
@@ -57,9 +57,7 @@ while(1):
         # os.remove('block.txt')
         # os.remove('comp_block.txt')
 
-    elif i == -1:
-        break
+#     elif i == -1:
+#         break
 
     print('length of queue =', len(queue))
-    
-        
