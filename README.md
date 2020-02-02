@@ -29,5 +29,5 @@ If internet connection fails, the dataset is stored locally, and pushed to the c
   A central computer subscribes to the single topic and segregates the incoming data by device by appending data corresponding to a particular device and the physical quantity to a text file. Messages from different devices are recognized by the 'id' key of the messages received with the data itself.
   
  ### Data compression:
-  
+  LZMA (Lempel-Ziv-Markov chain-Algorithm) algorithm is used for compression which in turn uses dictionary compression algorithm  
   
