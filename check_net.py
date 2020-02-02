@@ -36,26 +36,28 @@ while(1):
     jsonStr = open('comp_block.txt', 'rb').read()
 
     i = connect()
-    if i == 0:
+    if i == 0:  
         # add one json to queue
-        print("not connected")
+        print("Not Connected")
         queue.append(jsonStr)
         # os.remove('block.txt')
-        # os.remove('comp_block.txt')
+        os.rename('block.txt', 'block1.txt')
+        os.remove('comp_block.txt')
 
     elif i == 1:
         # add to cloud
-        print("connected to db, pushing")
+        print("Connected to DB")
         # print(jsonStr)
         # PUSH
         while not len(queue) == 0:
-            # dbClient.update(queue[0])
-            print('pushed queue[front]')
+            dbClient.update(queue[0])
+            print('Dequeued file to be uploaded')
             queue.pop()
-        # dbClient.update(jsonStr)
-        # print('pushed current jsonStr')
+        dbClient.update(jsonStr)
+        print('Pushed file to DB')
         # os.remove('block.txt')
-        # os.remove('comp_block.txt')
+        os.rename('block.txt', 'block1.txt')
+        os.remove('comp_block.txt')
 
 #     elif i == -1:
 #         break

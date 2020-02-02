@@ -12,7 +12,7 @@ from thread_handler.thread_handler import ThreadHandler
 
 # Local broker
 broker_address = '127.0.0.1'
-mqtt_port = 1883
+mqtt_port = 1884
 
 
 def on_connect(client, userdata, flags, rc):
@@ -24,11 +24,11 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    # print('\n\tMessage received')
+    print('\n\tMessage received')
 
     try:
         msg = message.payload.decode()
-        # print('\tpayload =', msg, '\n')
+        print('\tpayload =', msg, '\n')
 
         # Process message here
         msgDict = json.loads(msg)
@@ -47,16 +47,16 @@ def on_message(client, userdata, message):
     except Exception as ex:
         template = "centre:An exception of type {0} occurred. Arguments:\n{1!r}"
         message = template.format(type(ex).__name__, ex.args)
-        print(message)
+        # print(message)
 
 
 def on_subscribe(client, userdata, mid, granted_qos):
-    print('subscribed')
+    print('Subscribed')
 
 
 # Local broker
 broker_address = '127.0.0.1'
-mqtt_port = 1883
+mqtt_port = 1884
 
 # stores subscriptions even on disconnect
 client = mqtt.Client('sub', clean_session=False)

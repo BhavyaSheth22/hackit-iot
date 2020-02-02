@@ -31,8 +31,60 @@
             </tbody>
         </table>
     </div>
-
+    
+    <!-- <div id="chartContainer" style="height: 300px; width: 100%;"></div> -->
       <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <!--   <script>
+    
+    
+    
+    var dps;
+
+    getCoords = () => {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            // document.getElementById("demo").innerHTML = this.responseText;
+                // console.log(eval("[" + this.responseText + "]"))
+                dps = eval("[" + this.responseText + "]");
+            }
+        };
+        xhttp.open("GET", "/coords", true);
+
+        xhttp.send();
+    };
+
+    // var dps = getCoords();   //dataPoints. 
+     
+     var chart = new CanvasJS.Chart("chartContainer",{
+         title :{
+             text: "Live Data"
+         },
+         axisX: {						
+             title: "Axis X Title"
+         },
+         axisY: {						
+             title: "Units"
+         },
+         data: [{
+             type: "line",
+             dataPoints : dps
+         }]
+     });
+      
+     chart.render();
+     var updateInterval = 1000;
+
+    var updateChart = function () {
+        // dps = getCoords();   //dataPoints. 
+        // console.log(dps)
+        
+        chart.render();
+    };
+    setInterval(function(){updateChart()}, updateInterval); 
+ 
+    </script> -->
     </body>
   </html>
