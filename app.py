@@ -2,10 +2,10 @@ from flask import Flask
 from util.utils_aws import AwSClient
 from flask import render_template
 import json
+from matplotlib.pyplot as plt
 
-import json
 app = Flask(__name__)
-
+userClient = AwSClient('output')
 
 @app.route("/")
 def home():
