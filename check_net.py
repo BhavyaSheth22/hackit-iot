@@ -26,7 +26,7 @@ queue = []
 dbClient = AwSClient('fsociety_database')
 
 while(1):
-    elapsed_time = time.time() - start_time
+    # elapsed_time = time.time() - start_time
     # if round(elapsed_time) > 10 and round(elapsed_time) % 10 == 0:
     # print("10 secs gone")
 
