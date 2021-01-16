@@ -2,15 +2,9 @@ import json
 import os
 import shutil
 
-# class gen_json:
-#     def __init__(self):
-#         super().__init__()
-#     def make_block():
-
-
 def gen_json():
     final = {}
-    for deviceID in range(50):
+    for deviceID in range(5):
         deviceTree = {}
         try:
             timestamps = open('./data/' + str(deviceID) +
@@ -25,7 +19,7 @@ def gen_json():
         except Exception as ex:
             template = "centre:An exception of type {0} occurred. Arguments:\n{1!r}"
             message = template.format(type(ex).__name__, ex.args)
-            # print(message)
+
         try:
             shutil.rmtree('data/' + str(deviceID))
         except OSError as e:

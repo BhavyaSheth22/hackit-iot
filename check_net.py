@@ -12,7 +12,7 @@ def connect():
     timeout = 2
     try:
         _ = requests.get(url, timeout=timeout)
-        return 1
+        return 0
     except KeyboardInterrupt:
         return -1
     except:
@@ -23,14 +23,10 @@ def connect():
 
 queue = []
 
-dbClient = AwSClient('fsociety_database')
+# dbClient = AwSClient('fsociety_database')
 
 while(1):
-    # elapsed_time = time.time() - start_time
-    # if round(elapsed_time) > 10 and round(elapsed_time) % 10 == 0:
-    #     print("10 secs gone")
-
-    time.sleep(30)
+    time.sleep(5)
     gen_json()
     lzma_compress()
     jsonStr = open('comp_block.txt', 'rb').read()
@@ -44,20 +40,20 @@ while(1):
         os.rename('block.txt', 'block1.txt')
         os.remove('comp_block.txt')
 
-    elif i == 1:
-        # add to cloud
-        print("Connected to DB")
-        # print(jsonStr)
-        # PUSH
-        while not len(queue) == 0:
-            dbClient.update(queue[0])
-            print('Dequeued file to be uploaded')
-            queue.pop()
-        dbClient.update(jsonStr)
-        print('Pushed file to DB')
-        # os.remove('block.txt')
-        os.rename('block.txt', 'block1.txt')
-        os.remove('comp_block.txt')
+    # elif i == 1:
+    #     # add to cloud
+    #     print("Connected to DB")
+    #     # print(jsonStr)
+    #     # PUSH
+    #     while not len(queue) == 0:
+    #         dbClient.update(queue[0])
+    #         print('Dequeued file to be uploaded')
+    #         queue.pop()
+    #     dbClient.update(jsonStr)
+    #     print('Pushed file to DB')
+    #     # os.remove('block.txt')
+    #     os.rename('block.txt', 'block1.txt')
+    #     os.remove('comp_block.txt')
 
 #     elif i == -1:
 #         break

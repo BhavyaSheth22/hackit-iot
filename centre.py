@@ -24,17 +24,20 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    # print('\n\tMessage received')
-
     try:
         msg = message.payload.decode()
         # print('\tpayload =', msg, '\n')
 
         # Process message here
         msgDict = json.loads(msg)
+        # print(msgDict)
         dir_path = os.path.dirname(os.path.realpath(__file__))
+        # print(dir_path)
+        # print(dir_path + '/data/' + str(msgDict['i']))
+        
         if not os.path.isdir(dir_path + '/data/' + str(msgDict['i'])):
             os.mkdir(dir_path + '/data/' + str(msgDict['i']))
+        
         deviceDir = os.path.dirname(dir_path + '/data/' + str(msgDict['i']))
         for key, value in msgDict.items():
             if key == 't':
@@ -50,26 +53,26 @@ def on_message(client, userdata, message):
         # print(message)
 
 
+
 def on_subscribe(client, userdata, mid, granted_qos):
     print('Subscribed')
 
-
 # Local broker
 broker_address = '127.0.0.1'
-mqtt_port = 1884
+mqtt_port = 1883
 
 # stores subscriptions even on disconnect
+
+os.mkdir('data')
 client = mqtt.Client('sub', clean_session=False)
 client.connected_flag = False
 client.on_connect = on_connect
 client.on_subscribe = on_subscribe
 client.on_message = on_message
-# client.username_pw_set(username=mqtt_username, password=mqtt_password) $ For cloudmqtt
 
 client.connect(host=broker_address, port=mqtt_port)
 
 print('Waiting in main loop')
-# client.publish('test', 'conn')
 client.subscribe('house')
 client.loop_forever()
 print('loop ended')

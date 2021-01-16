@@ -1,6 +1,5 @@
 import lzma
 
-
 def lzma_compress():
     original_data = open('block.txt', 'rb').read()
     print('==========\nCompressing...')
