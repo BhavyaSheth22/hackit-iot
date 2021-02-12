@@ -32,7 +32,7 @@ def connect_client(deviceID):
         client_.publish('house', json.dumps(msg))
         print(deviceID, "published message")
         time.sleep(2)
-        # print('----------')
+        print('----------')
 
     client_.disconnect()
 
