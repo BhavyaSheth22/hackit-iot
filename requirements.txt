@@ -29,7 +29,7 @@ path==13.1.0
 path.py==12.4.0
 # pkg-resources
 pluggy==0.13.1
-py==1.8.1
+py==1.10.0
 pyasn1==0.4.8
 pyparsing==2.4.6
 pytest==5.3.5
