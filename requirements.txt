@@ -37,7 +37,7 @@ pytest-shutil==1.7.0
 python-dateutil==2.8.1
 PyYAML==5.2
 requests==2.22.0
-rsa==3.4.2
+rsa==4.7
 s3transfer==0.3.2
 six==1.14.0
 speedtest-cli==2.1.2
