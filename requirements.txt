@@ -42,7 +42,7 @@ s3transfer==0.3.2
 six==1.14.0
 speedtest-cli==2.1.2
 termcolor==1.1.0
-urllib3==1.25.8
+urllib3==1.26.5
 wcwidth==0.1.8
 Werkzeug==0.16.1
 zipp==2.1.0
